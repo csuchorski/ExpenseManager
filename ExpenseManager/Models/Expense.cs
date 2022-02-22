@@ -13,5 +13,10 @@ namespace ExpenseManager.Models
         public string ExpenseName { get; set; }
         public double Amount { get; set; }
         public DateTime ExpenseDate { get; set; }
+
+        public Expense()
+        {
+            ExpenseDate = DateTime.Now;
+        }
     }
 }

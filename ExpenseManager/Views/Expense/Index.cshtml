@@ -31,9 +31,15 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td width="30%">@item.ExpenseName</td>
-                        <td width="30%">@item.Amount</td>
-                        <td width="30%">@item.ExpenseDate</td>
+                        <td width="20%">@item.ExpenseName</td>
+                        <td width="20%">@item.Amount</td>
+                        <td width="20%">@item.ExpenseDate</td>
+                        <td width="40%" >
+                            <div class="text-right w-100 btn-group" role="group">
+                                <a asp-controller="Expense" asp-action="Update" asp-route-Id="@item.Id" class="btn btn-primary mx-1">Update</a>
+                                <a asp-controller="Expense" asp-action="Delete" asp-route-Id="@item.Id" class="btn btn-danger mx-1">Delete</a>
+                            </div>
+                        </td>
                     </tr>
                 }
             </tbody>

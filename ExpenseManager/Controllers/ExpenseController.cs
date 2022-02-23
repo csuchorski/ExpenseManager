@@ -16,10 +16,12 @@ namespace ExpenseManager.Controllers
             IEnumerable<Expense> objList = _db.Expenses;
             return View(objList);
         }
+        //Get Create
         public IActionResult Create()
         {
             return View();
         }
+        //Post Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Expense obj)
@@ -33,6 +35,36 @@ namespace ExpenseManager.Controllers
             return View(obj);
 
         }
+        //Get Delete
+        public IActionResult Delete(int? id)
+        {
+            if(id==null||id==0)
+            {
+                return NotFound();
+            }
+            Expense obj = _db.Expenses.Find(id);
+            if(obj==null)
+            {
+                return NotFound();
+            }
+            return View(obj);
+        }
+        //Post Delete
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeletePost(int? id)
+        {
+            Expense obj = _db.Expenses.Find(id);
+            if(obj==null)
+            {
+                return NotFound();
+            }
+            _db.Expenses.Remove(obj);
+            _db.SaveChanges();
+            return RedirectToAction("Index");
+            
+        }
+
         public ExpenseController(ApplicationDBContext db)
         {
             _db = db;

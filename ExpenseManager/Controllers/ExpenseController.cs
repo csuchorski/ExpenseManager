@@ -33,7 +33,6 @@ namespace ExpenseManager.Controllers
                 return RedirectToAction("Index");
             }
             return View(obj);
-
         }
         //Get Delete
         public IActionResult Delete(int? id)
@@ -65,6 +64,33 @@ namespace ExpenseManager.Controllers
             
         }
 
+        //Get Update
+        public IActionResult Update(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound();
+            }
+            Expense obj = _db.Expenses.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            return View(obj);
+        }
+        //Post Update
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Update(Expense obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Expenses.Update(obj);
+                _db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(obj);
+        }
         public ExpenseController(ApplicationDBContext db)
         {
             _db = db;

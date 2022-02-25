@@ -60,8 +60,7 @@ namespace ExpenseManager.Controllers
             }
             _db.Expenses.Remove(obj);
             _db.SaveChanges();
-            return RedirectToAction("Index");
-            
+            return RedirectToAction("Index");     
         }
 
         //Get Update

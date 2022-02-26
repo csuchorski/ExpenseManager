@@ -63,32 +63,5 @@ namespace ExpenseManager.Controllers
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
-        //Get Update
-        public IActionResult Update(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            Item obj = _db.Items.Find(id);
-            if (obj == null)
-            {
-                return NotFound();
-            }
-            return View(obj);
-        }
-        //Post Update
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult Update(Item obj)
-        {
-            if (ModelState.IsValid)
-            {
-                _db.Items.Update(obj);
-                _db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(obj);
-        }
     }
 }
